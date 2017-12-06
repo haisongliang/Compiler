@@ -26,5 +26,8 @@
     <ClInclude Include="C.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="error_handler.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
