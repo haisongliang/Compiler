@@ -8,7 +8,7 @@
 
 int main(int argc, char** argv)
 {
-	//读取文件名
+	//读取文件名。只支持UTF8无BOM格式的文件。
 	char const* filename;
 	if (argc > 1)
 	{
@@ -21,6 +21,7 @@ int main(int argc, char** argv)
 	}
 
 	std::wifstream wif(filename, std::ios_base::in);
+	wif.unsetf(std::ios::skipws);// No white space skipping!
 	wif.imbue(std::locale(std::locale::empty(), new std::codecvt_utf8<wchar_t>));
 	if (!wif)
 	{
@@ -32,6 +33,7 @@ int main(int argc, char** argv)
 	std::wstringstream buffer;
 	buffer << wif.rdbuf();
 	std::wstring source_code = buffer.str();
+	wif.close();
 
 	typedef std::wstring::const_iterator iterator_type;
 	iterator_type iter = source_code.begin();
